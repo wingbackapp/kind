@@ -1,0 +1,13 @@
+[package]
+name = "typid"
+version = "0.1.0"
+edition = "2021"
+
+[features]
+default = ["serde"]
+
+[dependencies]
+serde = { optional = true, version = "1.0.130", features = ["derive"] }
+sqlx = { version = "0.6", default-features = false, features = ["macros", "runtime-async-std-rustls", "postgres", "chrono", "json", "decimal", "uuid" ] }
+typid_derive = { path = "typid_derive" }
+
