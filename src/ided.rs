@@ -1,6 +1,7 @@
 use {
     super::*,
     sqlx::{postgres::PgRow, types::Uuid, Row},
+    std::hash::{Hash, Hasher},
 };
 
 /// Short for "Identified", wraps a struct and its identifier.
@@ -60,5 +61,11 @@ impl<T: Identifiable, E> Eq for Ided<T, E> {}
 impl<T: Identifiable, E> PartialEq for Ided<T, E> {
     fn eq(&self, other: &Self) -> bool {
         self.id.eq(&other.id)
+    }
+}
+
+impl<O: Identifiable> Hash for Ided<O> {
+    fn hash<H: Hasher>(&self, state: &mut H) {
+        self.id().hash(state);
     }
 }

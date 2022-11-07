@@ -1,7 +1,12 @@
 use {
     super::*,
     sqlx::types::Uuid,
-    std::{fmt, marker::PhantomData, str::FromStr},
+    std::{
+        fmt,
+        hash::{Hash, Hasher},
+        marker::PhantomData,
+        str::FromStr,
+    },
 };
 
 /// UUID with costless type constraints
@@ -89,5 +94,11 @@ impl<O: Identifiable> FromStr for Id<O> {
     type Err = IdError;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         Self::from_public_id(s)
+    }
+}
+
+impl<O: Identifiable> Hash for Id<O> {
+    fn hash<H: Hasher>(&self, state: &mut H) {
+        self.uuid().hash(state);
     }
 }

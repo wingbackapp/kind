@@ -4,9 +4,9 @@ use {
         decode::Decode,
         encode::{Encode, IsNull},
         error::BoxDynError,
-        postgres::{PgArgumentBuffer, PgHasArrayType, PgTypeInfo, PgValueRef, Postgres},
+        postgres::{PgArgumentBuffer, PgHasArrayType, PgRow, PgTypeInfo, PgValueRef, Postgres},
         types::Uuid,
-        Type,
+        Row, Type,
     },
 };
 
@@ -33,5 +33,19 @@ impl<O: Identifiable> Decode<'_, Postgres> for Id<O> {
         let uuid: Uuid = <Uuid as Decode<'_, Postgres>>::decode(value)?;
         let id = Id::unchecked(uuid);
         Ok(id)
+    }
+}
+
+impl<'r, T> Ided<T>
+where
+    T: Identifiable + sqlx::FromRow<'r, PgRow>,
+{
+    pub fn from_id_row(id_col_name: &'static str, row: &'r PgRow) -> Option<Ided<T>> {
+        let id = row.try_get::<Id<T>, _>(id_col_name);
+        let entity = T::from_row(row);
+        match (id, entity) {
+            (Ok(id), Ok(entity)) => Some(Ided::new(id, entity)),
+            _ => None,
+        }
     }
 }
