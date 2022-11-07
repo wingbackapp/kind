@@ -10,8 +10,8 @@ pub enum IdError {
 impl fmt::Display for IdError {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
-            Self::WrongClass => write!(f, "wrong class"),
-            Self::InvalidFormat => write!(f, "invalid format"),
+            Self::WrongClass => write!(f, "wrong object class"),
+            Self::InvalidFormat => write!(f, "invalid format for id"),
             Self::EmptyDbId => write!(f, "empty db id"),
         }
     }
