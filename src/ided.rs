@@ -69,3 +69,14 @@ impl<O: Identifiable> Hash for Ided<O> {
         self.id().hash(state);
     }
 }
+impl<T: Identifiable, E: Ord> Ord for Ided<T, E> {
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        self.entity().cmp(other.entity())
+    }
+}
+
+impl<T: Identifiable, E: Ord> PartialOrd for Ided<T, E> {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        Some(self.cmp(other))
+    }
+}
