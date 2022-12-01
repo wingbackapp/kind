@@ -10,4 +10,5 @@ default = ["serde"]
 serde = { optional = true, version = "1.0.130", features = ["derive"] }
 sqlx = { version = "0.6", default-features = false, features = ["macros", "runtime-async-std-rustls", "postgres", "chrono", "json", "decimal", "uuid" ] }
 typid_derive = { path = "typid_derive" }
+utoipa = "2.4"
 

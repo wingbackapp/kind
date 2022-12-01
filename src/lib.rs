@@ -59,10 +59,14 @@ mod ided;
 mod identifiable;
 mod postgres;
 
+mod openapi;
 #[cfg(feature = "serde")]
 mod serde;
 
-pub use {error::*, id::*, id_class::*, ided::*, identifiable::*, postgres::*, typid_derive::*};
+pub use {
+    error::*, id::*, id_class::*, ided::*, identifiable::*, openapi::*, postgres::*,
+    typid_derive::*,
+};
 
 #[cfg(feature = "serde")]
 pub use crate::serde::*;
