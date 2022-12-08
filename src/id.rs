@@ -18,7 +18,6 @@ use {
 /// The Display implementation provides the public id, which
 /// should be generally used, while the db id should be used
 /// only for communication with the database.
-#[derive(Debug)]
 pub struct Id<O: Identifiable> {
     uuid: Uuid,
     phantom: PhantomData<O>,
@@ -39,6 +38,14 @@ impl<O: Identifiable> fmt::Display for Id<O> {
     }
 }
 
+impl<O: Identifiable> fmt::Debug for Id<O> {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        f.debug_struct("Id")
+            .field("uuid", &self.uuid)
+            .field("class", &self.class().prefix())
+            .finish()
+    }
+}
 impl<O: Identifiable> Clone for Id<O> {
     fn clone(&self) -> Self {
         Self::unchecked(self.uuid)
@@ -86,6 +93,12 @@ impl<O: Identifiable> Id<O> {
             uuid,
             phantom: PhantomData,
         }
+    }
+    /// Build a random Id based on Uuid v4 (only random)
+    ///
+    /// See https://www.rfc-editor.org/rfc/rfc4122#section-4.4
+    pub fn random_v4() -> Self {
+        Self::unchecked(Uuid::new_v4())
     }
 }
 
