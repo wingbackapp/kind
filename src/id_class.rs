@@ -38,11 +38,8 @@ impl IdClass {
         let mut public_id_chars = public_id.chars();
         let mut public_prefix_len = 0; // in bytes
         for class_char in self.prefix.chars() {
-            let public_id_char = match public_id_chars.next() {
-                Some(c) => c,
-                None => {
-                    return Err(IdError::WrongClass);
-                }
+            let Some(public_id_char) = public_id_chars.next() else {
+                return Err(IdError::WrongClass);
             };
             if !public_id_char.eq_ignore_ascii_case(&class_char) {
                 return Err(IdError::WrongClass);

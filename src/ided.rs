@@ -6,9 +6,7 @@ use {
 
 /// Short for "Identified", wraps a struct and its identifier.
 ///
-/// Similar to our wingback-core Known, and should replace it.
-///
-/// The concrete type will most often be defined with only
+/// The concrete type is most often be defined with only
 /// one identifiable type, eg `Ided<Invoice>`, but it's also
 /// possible to wrap an object with a non directly linked id,
 /// as in `Ided<Invoice, InvoiceExpanded>`.
