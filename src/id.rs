@@ -96,7 +96,7 @@ impl<O: Identifiable> Id<O> {
     }
     /// Build a random Id based on Uuid v4 (only random)
     ///
-    /// See https://www.rfc-editor.org/rfc/rfc4122#section-4.4
+    /// See <https://www.rfc-editor.org/rfc/rfc4122#section-4.4>
     pub fn random_v4() -> Self {
         Self::unchecked(Uuid::new_v4())
     }

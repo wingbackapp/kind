@@ -55,6 +55,7 @@
 mod error;
 mod id;
 mod id_class;
+mod id_enum;
 mod ided;
 mod identifiable;
 mod postgres;
@@ -64,7 +65,7 @@ mod openapi;
 mod serde;
 
 pub use {
-    error::*, id::*, id_class::*, ided::*, identifiable::*, openapi::*, postgres::*,
+    error::*, id::*, id_class::*, id_enum::*, ided::*, identifiable::*, openapi::*, postgres::*,
     typid_derive::*,
 };
 

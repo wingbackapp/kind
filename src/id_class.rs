@@ -47,7 +47,11 @@ impl IdClass {
             public_prefix_len += public_id_char.len_utf8();
         }
         if public_id_chars.next() != Some('_') {
-            return Err(IdError::InvalidFormat);
+            if public_id.contains('_') {
+                return Err(IdError::WrongClass);
+            } else {
+                return Err(IdError::InvalidFormat);
+            }
         }
         public_prefix_len += 1;
         Ok(&public_id[public_prefix_len..])
