@@ -21,7 +21,7 @@ pub fn typid_macro_derive(input: TokenStream) -> TokenStream {
     }
     for c in class.chars() {
         if !c.is_ascii_alphanumeric() {
-            panic!("Invalid character {:?} in typid class {:?}", c, class);
+            panic!("Invalid character {c:?} in typid class {class:?}");
         }
     }
     let class_const = format_ident!("TYPID_CLASS_{}", class);
