@@ -62,7 +62,7 @@ mod postgres;
 
 mod openapi;
 #[cfg(feature = "serde")]
-mod serde;
+mod serde_serialize;
 
 pub use {
     error::*, id::*, id_class::*, id_enum::*, ided::*, identifiable::*, openapi::*, postgres::*,
@@ -70,4 +70,4 @@ pub use {
 };
 
 #[cfg(feature = "serde")]
-pub use crate::serde::*;
+pub use crate::serde_serialize::*;

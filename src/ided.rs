@@ -1,3 +1,4 @@
+use serde::{Deserialize, Serialize};
 use {
     super::*,
     sqlx::{postgres::PgRow, types::Uuid, Row},
@@ -11,8 +12,10 @@ use {
 /// possible to wrap an object with a non directly linked id,
 /// as in `Ided<Invoice, InvoiceExpanded>`.
 #[derive(Debug, Clone)]
+#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct Ided<T: Identifiable, E = T> {
     id: Id<T>,
+    #[cfg_attr(feature = "serde", serde(flatten))]
     entity: E,
 }
 

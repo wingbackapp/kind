@@ -14,3 +14,6 @@ typid_derive = { path = "typid_derive" }
 utoipa = "3.0.2"
 uuid = { version = "1.1.2", features = ["v4"] }
 
+[dev-dependencies]
+serde_json = "1.0.93"
+rstest = "0.16.0"
