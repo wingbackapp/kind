@@ -36,13 +36,14 @@ impl<O: Identifiable> Decode<'_, Postgres> for Id<O> {
     }
 }
 
-impl<'r, T> Ided<T>
+impl<'r, T, E> Ided<T, E>
 where
-    T: Identifiable + sqlx::FromRow<'r, PgRow>,
+    T: Identifiable,
+    E: sqlx::FromRow<'r, PgRow>,
 {
-    pub fn from_id_row(id_col_name: &'static str, row: &'r PgRow) -> Option<Ided<T>> {
+    pub fn from_id_row(id_col_name: &'static str, row: &'r PgRow) -> Option<Ided<T, E>> {
         let id = row.try_get::<Id<T>, _>(id_col_name);
-        let entity = T::from_row(row);
+        let entity = E::from_row(row);
         match (id, entity) {
             (Ok(id), Ok(entity)) => Some(Ided::new(id, entity)),
             _ => None,
