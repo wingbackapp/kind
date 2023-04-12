@@ -60,6 +60,8 @@ mod ided;
 mod identifiable;
 mod postgres;
 
+#[cfg(feature = "jsonschema")]
+mod jsonschema;
 mod openapi;
 #[cfg(feature = "serde")]
 mod serde_serialize;
@@ -71,3 +73,6 @@ pub use {
 
 #[cfg(feature = "serde")]
 pub use crate::serde_serialize::*;
+
+#[cfg(feature = "jsonschema")]
+pub use crate::jsonschema::*;
