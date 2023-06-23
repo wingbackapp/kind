@@ -7,9 +7,11 @@ rust-version = "1.65"
 [features]
 default = ["serde", "jsonschema"]
 jsonschema = ["dep:schemars"]
+serde = ["dep:serde", "dep:serde_json"]
 
 [dependencies]
 serde = { optional = true, version = "1.0.130", features = ["derive"] }
+serde_json = { optional = true, version = "1.0.95" }
 sqlx = { version = "0.6.2", default-features = false, features = ["macros", "runtime-async-std-rustls", "postgres", "chrono", "json", "decimal", "uuid" ] }
 typid_derive = { path = "typid_derive" }
 utoipa = "3.0.2"
