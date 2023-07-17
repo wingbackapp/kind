@@ -81,3 +81,9 @@ impl<T: Identifiable, E: Ord> PartialOrd for Ided<T, E> {
         Some(self.cmp(other))
     }
 }
+
+impl<T: Identifiable, E> AsRef<E> for Ided<T, E> {
+    fn as_ref(&self) -> &E {
+        &self.entity
+    }
+}
