@@ -16,6 +16,8 @@ impl<O: Identifiable> Type<Postgres> for Id<O> {
     }
 }
 
+// Make it possible to bind a slice of Id in a
+// query and use it with eg the ANY operator.
 impl<O: Identifiable> PgHasArrayType for Id<O> {
     fn array_type_info() -> PgTypeInfo {
         <Uuid as PgHasArrayType>::array_type_info()

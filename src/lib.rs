@@ -55,11 +55,12 @@
 mod error;
 mod id;
 mod id_class;
-mod id_enum;
 mod ided;
 mod identifiable;
 mod postgres;
 
+#[cfg(feature = "serde")]
+mod id_enum;
 #[cfg(feature = "jsonschema")]
 mod jsonschema;
 mod openapi;

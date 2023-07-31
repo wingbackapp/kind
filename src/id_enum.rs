@@ -12,7 +12,7 @@
 ///
 /// #[derive(Debug, Typid)]
 /// #[typid(class="Cat")]
-/// pub struct Cat{}
+/// pub struct Cat {}
 ///
 /// // Declare an enum PetId whose values are ids of either a dog or a cat
 /// id_enum! {PetId: Dog, Cat}
@@ -58,6 +58,24 @@ macro_rules! id_enum {
                     }
                 )*
                 Err(IdError::WrongClass)
+            }
+        }
+        impl serde::Serialize for $Enum {
+            fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+            where
+                S: serde::Serializer,
+            {
+                serializer.serialize_str(&self.to_string())
+            }
+        }
+        impl<'de> serde::Deserialize<'de> for $Enum {
+            fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                use std::str::FromStr;
+                let s = String::deserialize(deserializer)?;
+                Self::from_str(&s).map_err(serde::de::Error::custom)
             }
         }
     }
