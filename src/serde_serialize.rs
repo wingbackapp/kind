@@ -22,6 +22,13 @@ impl<'de, O: Identifiable> Deserialize<'de> for Id<O> {
     }
 }
 
+pub fn deserialize_raw<'de, O: Identifiable, D: Deserializer<'de>>(
+    deserializer: D,
+) -> Result<Id<O>, D::Error> {
+    let s = String::deserialize(deserializer)?;
+    Id::from_public_id(&s).map_err(de::Error::custom)
+}
+
 #[cfg(test)]
 mod test {
     use crate::{Id, Ided};
