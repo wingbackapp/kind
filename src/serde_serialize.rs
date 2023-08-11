@@ -26,7 +26,7 @@ pub fn deserialize_raw<'de, O: Identifiable, D: Deserializer<'de>>(
     deserializer: D,
 ) -> Result<Id<O>, D::Error> {
     let s = String::deserialize(deserializer)?;
-    Id::from_public_id(&s).map_err(de::Error::custom)
+    Id::from_db_id(&s).map_err(de::Error::custom)
 }
 
 #[cfg(test)]
