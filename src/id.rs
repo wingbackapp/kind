@@ -49,7 +49,7 @@ impl<O: Identifiable> fmt::Debug for Id<O> {
 }
 impl<O: Identifiable> Clone for Id<O> {
     fn clone(&self) -> Self {
-        Self::unchecked(self.uuid)
+        *self
     }
 }
 impl<O: Identifiable> Copy for Id<O> {}
