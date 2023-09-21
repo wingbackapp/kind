@@ -10,14 +10,14 @@ jsonschema = ["dep:schemars"]
 serde = ["dep:serde", "dep:serde_json"]
 
 [dependencies]
-serde = { optional = true, version = "1.0.130", features = ["derive"] }
-serde_json = { optional = true, version = "1.0.95" }
-sqlx = { version = "0.6.2", default-features = false, features = ["macros", "runtime-async-std-rustls", "postgres", "chrono", "json", "decimal", "uuid" ] }
+serde = { optional = true, workspace = true }
+serde_json = { optional = true, workspace = true }
+sqlx = { workspace = true, features = [ "rust_decimal", "uuid" ] }
 typid_derive = { path = "typid_derive" }
-utoipa = "3.0.2"
-uuid = { version = "1.3", features = ["v4"] }
-schemars = { optional = true, version = "0.8.11" }
+utoipa = {workspace = true}
+uuid = { workspace = true }
+schemars = { optional = true, workspace = true }
 
 [dev-dependencies]
-serde_json = "1.0.95"
-rstest = "0.16.0"
+serde_json = {workspace = true}
+rstest = {workspace = true}
