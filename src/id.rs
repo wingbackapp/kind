@@ -56,7 +56,7 @@ impl<O: Identifiable> Copy for Id<O> {}
 
 impl<O: Identifiable> PartialOrd for Id<O> {
     fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
-        self.uuid.partial_cmp(&other.uuid)
+        Some(self.cmp(other))
     }
 }
 impl<O: Identifiable> Ord for Id<O> {
