@@ -43,12 +43,12 @@ where
     T: Identifiable,
     E: sqlx::FromRow<'r, PgRow>,
 {
-    pub fn from_id_row(id_col_name: &'static str, row: &'r PgRow) -> Option<Ided<T, E>> {
-        let id = row.try_get::<Id<T>, _>(id_col_name);
-        let entity = E::from_row(row);
-        match (id, entity) {
-            (Ok(id), Ok(entity)) => Some(Ided::new(id, entity)),
-            _ => None,
-        }
+    pub fn from_id_row(
+        id_col_name: &'static str,
+        row: &'r PgRow,
+    ) -> Result<Ided<T, E>, sqlx::Error> {
+        let id = row.try_get::<Id<T>, _>(id_col_name)?;
+        let entity = E::from_row(row)?;
+        Ok(Ided::new(id, entity))
     }
 }

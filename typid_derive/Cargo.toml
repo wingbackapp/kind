@@ -11,3 +11,5 @@ darling = "0.14"
 syn = "1.0"
 quote = "1.0"
 
+[lints]
+workspace = true
