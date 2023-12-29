@@ -67,6 +67,7 @@ mod openapi;
 #[cfg(feature = "serde")]
 mod serde_serialize;
 
+#[allow(unused_imports)]
 pub use {
     error::*, id::*, id_class::*, id_enum::*, ided::*, identifiable::*, openapi::*, postgres::*,
     typid_derive::*,
@@ -75,5 +76,6 @@ pub use {
 #[cfg(feature = "serde")]
 pub use crate::serde_serialize::*;
 
+#[allow(unused_imports)]
 #[cfg(feature = "jsonschema")]
 pub use crate::jsonschema::*;
