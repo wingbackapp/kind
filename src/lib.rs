@@ -1,5 +1,6 @@
 //! A typid::Id is strongly typed to avoid misuse of Rust APIs, especially
 //! when functions ask for several ids of different types.
+//!
 //! The typid::Id also prevents the misuse of any string based API, such
 //! as Rest or GraphQL, by prefixing the internally used ids with a class
 //! prefix.
@@ -57,6 +58,8 @@ mod id;
 mod id_class;
 mod ided;
 mod identifiable;
+
+#[cfg(feature = "sqlx")]
 mod postgres;
 
 #[cfg(feature = "serde")]
@@ -68,13 +71,11 @@ mod openapi;
 mod serde_serialize;
 
 #[allow(unused_imports)]
-pub use {
-    error::*, id::*, id_class::*, id_enum::*, ided::*, identifiable::*, openapi::*, postgres::*,
-    typid_derive::*,
-};
+pub use {error::*, id::*, id_class::*, ided::*, identifiable::*, openapi::*, typid_derive::*};
 
+#[allow(unused_imports)]
 #[cfg(feature = "serde")]
-pub use crate::serde_serialize::*;
+pub use {crate::serde_serialize::*, id_enum::*};
 
 #[allow(unused_imports)]
 #[cfg(feature = "jsonschema")]

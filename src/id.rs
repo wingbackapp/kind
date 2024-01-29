@@ -1,6 +1,5 @@
 use {
     super::*,
-    sqlx::types::Uuid,
     std::{
         cmp::Ordering,
         fmt,
@@ -8,6 +7,7 @@ use {
         marker::PhantomData,
         str::FromStr,
     },
+    uuid::Uuid,
 };
 
 /// UUID with costless type constraints
@@ -71,8 +71,8 @@ impl<O: Identifiable> Id<O> {
         <O as Identifiable>::class()
     }
     /// Return the internal UUID
-    pub fn uuid(&self) -> &Uuid {
-        &self.uuid
+    pub fn uuid(&self) -> Uuid {
+        self.uuid
     }
     /// Return the database identifier as a string.
     ///

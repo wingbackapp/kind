@@ -5,7 +5,6 @@ use {
 
 impl<O: Identifiable> JsonSchema for Id<O> {
     fn schema_name() -> String {
-        // format!("{} Id", std::any::type_name::<O>())
         format!("{}_uuid", O::class().prefix())
     }
 

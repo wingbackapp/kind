@@ -8,11 +8,12 @@ rust-version = "1.65"
 default = ["serde", "jsonschema"]
 jsonschema = ["dep:schemars"]
 serde = ["dep:serde", "dep:serde_json"]
+sqlx = ["dep:sqlx"]
 
 [dependencies]
 serde = { optional = true, workspace = true }
 serde_json = { optional = true, workspace = true }
-sqlx = { workspace = true, features = [ "rust_decimal", "uuid" ] }
+sqlx = { optional = true, workspace = true, features = [ "rust_decimal", "uuid" ] }
 typid_derive = { path = "typid_derive" }
 utoipa = {workspace = true}
 uuid = { workspace = true }

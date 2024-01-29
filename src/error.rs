@@ -1,5 +1,6 @@
 use std::fmt;
 
+/// An error which can be returned by the typid library
 #[derive(Debug, PartialEq, Eq, Clone, Copy)]
 pub enum IdError {
     WrongClass,

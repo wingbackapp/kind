@@ -22,13 +22,16 @@
 /// //     Dog(Id<Dog>),
 /// //     Cat(Id<Cat>),
 /// // }
-/// // but comes with automatic impls of FromStr and Display.
+/// // but comes with automatic impls of FromStr, Display,
+/// // Serialize and Deserialize.
 ///
 /// let s = "Dog_453d6f99-ce09-4dd7-bde9-73c1d2dbc1d0";
 /// let a: PetId = s.parse().unwrap();
 /// assert!(matches!(a, PetId::Dog(_)));
 /// assert_eq!(s.to_string(), a.to_string());
 /// ```
+///
+/// This macro needs the "serde" feature to be enabled.
 #[macro_export]
 macro_rules! id_enum {
     {$Enum:ident: $($T:ident),* $(,)*} => {
