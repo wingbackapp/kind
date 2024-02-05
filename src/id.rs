@@ -130,8 +130,8 @@ impl<O: Identifiable> Hash for Id<O> {
 
 #[test]
 fn id_sorting() {
-    #[derive(Debug, Typid)]
-    #[typid(class = "Ex")]
+    #[derive(Debug, Kind)]
+    #[kind(class = "Ex")]
     pub struct E {}
 
     let mut ids = Vec::<Id<E>>::new();

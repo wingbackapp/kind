@@ -6,22 +6,22 @@ use {
 };
 
 #[derive(FromDeriveInput)]
-#[darling(attributes(typid))]
+#[darling(attributes(kind))]
 struct Opts {
     class: String,
 }
 
-#[proc_macro_derive(Typid, attributes(typid))]
-pub fn typid_macro_derive(input: TokenStream) -> TokenStream {
+#[proc_macro_derive(Kind, attributes(kind))]
+pub fn kind_macro_derive(input: TokenStream) -> TokenStream {
     let input = parse_macro_input!(input);
     let opts = Opts::from_derive_input(&input).expect("Wrong options");
     let class = opts.class;
     if class.is_empty() {
-        panic!("typid class can't be empty")
+        panic!("kind class can't be empty")
     }
     for c in class.chars() {
         if !c.is_ascii_alphanumeric() {
-            panic!("Invalid character {c:?} in typid class {class:?}");
+            panic!("Invalid character {c:?} in kind class {class:?}");
         }
     }
     let class_const = format_ident!("TYPID_CLASS_{}", class);

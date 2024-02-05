@@ -4,7 +4,7 @@ use super::IdClass;
 /// an id (the id may be part, or not, of the object).
 ///
 /// The best way to add this trait to a struct is to
-/// use the `typid` derive attribute
+/// use the `kind` derive attribute
 pub trait Identifiable {
     fn class() -> IdClass;
 }

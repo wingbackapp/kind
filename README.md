@@ -1,7 +1,7 @@
 
-## Why typid ?
+## Why kind ?
 
-With typid, you
+With kind, you
 
 - use typed identifiers in Rust, with no overhead over Uuid
 - have the type be obvious in JSON and any export
@@ -21,33 +21,33 @@ In the current version, the sqlx feature is only complete for postgresql.
 
 ## Usage overview
 
-A typid::Id is strongly typed to avoid misuse of Rust APIs, especially
+A `kind::Id` is strongly typed to avoid misuse of Rust APIs, especially
 when functions ask for several ids of different types.
 
-The typid::Id also prevents the misuse of any string based API, such
+The `kind::Id` also prevents the misuse of any string based API, such
 as Rest or GraphQL, by prefixing the internally used ids with a class
 prefix.
 
 ```
-use typid::*;
+use kind::*;
 
 // The structs we want to define Id types for are just annotated. The
 // Identifiable trait is derived.
 
-#[derive(Debug, Typid)]
-#[typid(class="Cust")]
+#[derive(Debug, Kind)]
+#[kind(class="Cust")]
 pub struct Customer {
     // many fields
 }
 
-#[derive(Debug, Typid)]
-#[typid(class="Cont")]
+#[derive(Debug, Kind)]
+#[kind(class="Cont")]
 pub struct Contract {
     // many fields
 }
 
 // Let's start from an id in the database (we use the string representantion
-// but typid natively decodes from postgres' Uuid into Id)
+// but kind natively decodes from postgres' Uuid into Id)
 let customer_db_id = "371c35ec-34d9-4315-ab31-7ea8889a419a";
 
 // Now, use it to get our Rust instance of Id:

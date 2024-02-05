@@ -3,15 +3,15 @@
 /// A value can be parsed from string, the type being guessed from the prefix.
 ///
 /// ```
-/// use typid::*;
+/// use kind::*;
 ///
 /// // Declare 2 types
-/// #[derive(Debug, Typid)]
-/// #[typid(class="Dog")]
+/// #[derive(Debug, Kind)]
+/// #[kind(class="Dog")]
 /// pub struct Dog {}
 ///
-/// #[derive(Debug, Typid)]
-/// #[typid(class="Cat")]
+/// #[derive(Debug, Kind)]
+/// #[kind(class="Cat")]
 /// pub struct Cat {}
 ///
 /// // Declare an enum PetId whose values are ids of either a dog or a cat

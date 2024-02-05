@@ -1,5 +1,5 @@
 [package]
-name = "typid_derive"
+name = "kind_proc"
 version = "0.1.0"
 edition = "2021"
 
@@ -10,6 +10,3 @@ proc-macro = true
 darling = "0.14"
 syn = "1.0"
 quote = "1.0"
-
-[lints]
-workspace = true

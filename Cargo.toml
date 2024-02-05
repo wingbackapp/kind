@@ -1,5 +1,5 @@
 [package]
-name = "typid"
+name = "kind"
 version = "0.1.0"
 edition = "2021"
 rust-version = "1.65"
@@ -11,17 +11,14 @@ serde = ["dep:serde", "dep:serde_json"]
 sqlx = ["dep:sqlx"]
 
 [dependencies]
-serde = { optional = true, workspace = true }
-serde_json = { optional = true, workspace = true }
-sqlx = { optional = true, workspace = true, features = [ "rust_decimal", "uuid" ] }
-typid_derive = { path = "typid_derive" }
-utoipa = {workspace = true}
-uuid = { workspace = true }
-schemars = { optional = true, workspace = true }
+serde = { optional = true, version = "1.0", features = ["derive"] }
+serde_json = { optional = true, version = "1.0" }
+sqlx = { optional = true, version = "0.7", default-features = false, features = ["macros", "runtime-async-std-rustls", "postgres", "chrono", "json"] }
+kind_proc = { path = "kind_proc" }
+utoipa = "3.5"
+uuid = { version = "1.4", features = ["v4"] }
+schemars = { optional = true, version = "0.8.16" }
 
 [dev-dependencies]
-serde_json = {workspace = true}
-rstest = {workspace = true}
-
-[lints]
-workspace = true
+serde_json = { version = "1.0" }
+rstest = "0.18"

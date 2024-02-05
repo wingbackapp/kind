@@ -36,12 +36,12 @@ mod test {
     use rstest::rstest;
     use serde::{Deserialize, Serialize};
     use serde_json::json;
-    use typid_derive::Typid;
+    use kind_proc::Kind;
 
     const ID: &str = "86261271-0fc7-46d3-81c6-0b0158628331";
 
-    #[derive(Debug, Typid, Serialize, Deserialize)]
-    #[typid(class = "Test")]
+    #[derive(Debug, Kind, Serialize, Deserialize)]
+    #[kind(class = "Test")]
     struct TestStruct {
         pub field: String,
         pub answer: i32,
