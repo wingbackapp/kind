@@ -33,10 +33,10 @@ pub fn deserialize_raw<'de, O: Identifiable, D: Deserializer<'de>>(
 mod test {
     use crate::{Id, Ided};
     use crate::{IdClass, Identifiable};
+    use kind_proc::Kind;
     use rstest::rstest;
     use serde::{Deserialize, Serialize};
     use serde_json::json;
-    use kind_proc::Kind;
 
     const ID: &str = "86261271-0fc7-46d3-81c6-0b0158628331";
 

@@ -1,7 +1,7 @@
 
 ## Why kind ?
 
-With kind, you
+With **kind**, you
 
 - use typed identifiers in Rust, with no overhead over Uuid
 - have the type be obvious in JSON and any export
@@ -9,6 +9,7 @@ With kind, you
 - don't have to add code for that, never explicitly stringify, parse, check types, etc.
 - have no boilerplate to declare types and identifiers
 - have your ids implement Copy, Debug, Display, FromStr, Serialize, Deserialize, Eq, Hash, etc.
+- can safely deal with both identified objects and new ones of same kind
 
 
 ## Optional features

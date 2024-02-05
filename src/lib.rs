@@ -71,7 +71,7 @@ mod openapi;
 mod serde_serialize;
 
 #[allow(unused_imports)]
-pub use {error::*, id::*, id_class::*, ided::*, identifiable::*, openapi::*, kind_proc::*};
+pub use {error::*, id::*, id_class::*, ided::*, identifiable::*, kind_proc::*, openapi::*};
 
 #[allow(unused_imports)]
 #[cfg(feature = "serde")]
