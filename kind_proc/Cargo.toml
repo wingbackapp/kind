@@ -2,6 +2,12 @@
 name = "kind_proc"
 version = "0.1.0"
 edition = "2021"
+rust-version = "1.65"
+description = "procedural macro for the 'kind' crate"
+keywords = ["serde", "sqlx", "type", "uuid"]
+license = "MIT"
+categories = ["rust-patterns"]
+repository = "https://github.com/wingbackapp/kind"
 
 [lib]
 proc-macro = true
