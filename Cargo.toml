@@ -3,6 +3,12 @@ name = "kind"
 version = "0.1.0"
 edition = "2021"
 rust-version = "1.65"
+description = "Costless typed identifiers backed by UUID, with kind readable in serialized versions"
+keywords = ["serde", "sqlx", "type", "uuid"]
+license = "MIT"
+categories = ["rust-patterns"]
+repository = "https://github.com/wingbackapp/kind"
+readme = "README.md"
 
 [features]
 default = ["serde", "jsonschema"]

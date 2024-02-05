@@ -4,7 +4,7 @@
 With **kind**, you
 
 - use typed identifiers in Rust, with no overhead over Uuid
-- have the type be obvious in JSON and any export
+- have the type be human readable and obvious in JSON and any export
 - still use uuid in your database (if enabling the sqlx feature)
 - don't have to add code for that, never explicitly stringify, parse, check types, etc.
 - have no boilerplate to declare types and identifiers
