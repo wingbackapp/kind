@@ -24,7 +24,7 @@ pub fn kind_macro_derive(input: TokenStream) -> TokenStream {
             panic!("Invalid character {c:?} in kind class {class:?}");
         }
     }
-    let class_const = format_ident!("TYPID_CLASS_{}", class);
+    let class_const = format_ident!("KIND_CLASS_{}", class);
     let DeriveInput { ident, .. } = input;
     let gen = quote! {
         pub static #class_const: IdClass = IdClass::new(#class);

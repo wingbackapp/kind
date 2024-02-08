@@ -8,8 +8,8 @@ With **kind**, you
 - still use uuid in your database (if enabling the sqlx feature)
 - don't have to add code for that, never explicitly stringify, parse, check types, etc.
 - have no boilerplate to declare types and identifiers
-- have your ids implement Copy, Debug, Display, FromStr, Serialize, Deserialize, Eq, Hash, etc.
-- can safely deal with both identified objects and new ones of same kind
+- have your ids implement Copy, Display, FromStr, Serialize, Deserialize, Eq, Hash, etc.
+- safely deal with both identified objects and new ones of same kind
 
 
 ## Optional features
@@ -141,9 +141,9 @@ assert!(serde_json::from_str::<Ided<Customer>>(&json).is_err());
 
 In database, the id is just an `uuid`. The kind of the id in the database is implicitly given by the query and your DB structure, there's no additional check on reading/writing from rust to the DB and you don't have to change the DB structure when starting to use Kind.
 
-The `Id` type implements `Encode` and `Decode`, so that it can be used transparently in sqlx queries just like any other primary type.
+The `Id` type implements `Encode` and `Decode`, so that it can be used transparently in sqlx queries just like any other primary type (arrays of `Id` are supported too, which is convenient with PostgreSQL).
 
-As for serde, FromRow implementation on Ided is automatically deduced from the implementation on the raw struct.
+As for serde, `FromRow` implementation on `Ided` is automatically deduced from the implementation on the raw struct.
 
 So you will usually just declare your struct like this to have the `Ided` loaded from an `sqlx::Row` containing both the `id` column and the ones of the raw struct:
 
@@ -212,5 +212,4 @@ impl utoipa::OpenApi for ApiDoc {
     }
 }
 ```
-
 
