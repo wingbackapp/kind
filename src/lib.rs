@@ -124,7 +124,7 @@ fn test_id_ided() {
     // Give it an id, by wrapping it in an Ided
     let customer = Ided::new(id, new_customer);
 
-    assert_eq!(customer.entity().name, "John");
+    assert_eq!(customer.name, "John");
     assert_eq!(
         customer.id().to_string(),
         "Cust_371c35ec-34d9-4315-ab31-7ea8889a419a"
@@ -161,5 +161,10 @@ fn test_serde() {
         "name": "John"
     }"#;
     assert!(serde_json::from_str::<Ided<Customer>>(&json).is_err());
+
+    assert_eq!(
+        serde_json::to_string(&customer).unwrap(),
+        r#"{"id":"Cust_371c35ec-34d9-4315-ab31-7ea8889a419a","name":"John"}"#,
+    );
 
 }

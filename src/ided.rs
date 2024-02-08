@@ -99,3 +99,10 @@ impl<T: Identifiable, E> AsRef<E> for Ided<T, E> {
         &self.entity
     }
 }
+
+impl<T: Identifiable, E> std::ops::Deref for Ided<T, E> {
+    type Target = E;
+    fn deref(&self) -> &Self::Target {
+        &self.entity
+    }
+}
