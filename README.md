@@ -148,7 +148,6 @@ pub struct Customer {
     pub name: String,
 }
 ```
-
 ## JSON schema
 
 If you are generating JSON schema for your objects using [schemars crate](https://crates.io/crates/schemars), you can enable `jsonschema` feature, and we will generate definition for the `Id` object and any `Ided` object:
@@ -207,4 +206,5 @@ impl utoipa::OpenApi for ApiDoc {
     }
 }
 ```
+
 
