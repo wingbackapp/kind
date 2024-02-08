@@ -80,3 +80,86 @@ pub use {crate::serde_serialize::*, id_enum::*};
 #[allow(unused_imports)]
 #[cfg(feature = "jsonschema")]
 pub use crate::jsonschema::*;
+
+#[test]
+fn test_id_ided() {
+
+    #[derive(Debug, Kind)]
+    #[kind(class="Cust")]
+    pub struct Customer {
+        pub name: String,
+    }
+
+    #[derive(Debug, Kind)]
+    #[kind(class="Cont")]
+    pub struct Contract {
+        // many fields
+    }
+
+    // It's costless: the kind is handled by the type system
+    // and doesn't clutter the compiled binary
+    assert_eq!(
+        std::mem::size_of::<Id<Customer>>(),
+        std::mem::size_of::<uuid::Uuid>(),
+    );
+
+    // You can parse the id from eg JSON, or just a string
+    let id: Id<Customer> = "Cust_371c35ec-34d9-4315-ab31-7ea8889a419a"
+        .parse().unwrap();
+
+    // The type is checked, so this id can't be misused as a contract id
+    assert!(
+        "Cust_371c35ec-34d9-4315-ab31-7ea8889a419a"
+        .parse::<Id<Contract>>()
+        .is_err()
+    );
+
+    // The public id is parsed and checked in a case insensitive way
+    assert_eq!(id, "cust_371c35ec-34d9-4315-ab31-7ea8889a419a".parse().unwrap());
+    assert_eq!(id, "CUST_371C35EC-34D9-4315-AB31-7EA8889A419A".parse().unwrap());
+
+    // You can build an identified object from just
+    // Here's a new customer:
+    let new_customer = Customer { name: "John".to_string() };
+    // Give it an id, by wrapping it in an Ided
+    let customer = Ided::new(id, new_customer);
+
+    assert_eq!(customer.entity().name, "John");
+    assert_eq!(
+        customer.id().to_string(),
+        "Cust_371c35ec-34d9-4315-ab31-7ea8889a419a"
+    );
+}
+
+#[cfg(feature = "serde")]
+#[test]
+fn test_serde() {
+
+    // deserialize a customer
+    #[derive(Debug, Kind, serde::Serialize, serde::Deserialize)]
+    #[kind(class="Cust")]
+    pub struct Customer {
+        pub name: String,
+    }
+
+    let json = r#"{
+        "id": "Cust_371c35ec-34d9-4315-ab31-7ea8889a419a",
+        "name": "John"
+    }"#;
+
+    let customer: Ided<Customer> = serde_json::from_str(&json).unwrap();
+    assert_eq!(customer.entity().name, "John");
+    assert_eq!(
+        customer.id().to_string(),
+        "Cust_371c35ec-34d9-4315-ab31-7ea8889a419a"
+    );
+
+    // id kind is checked: this one fails because the prefix of the
+    // id is wrong
+    let json = r#"{
+        "id": "Con_371c35ec-34d9-4315-ab31-7ea8889a419a",
+        "name": "John"
+    }"#;
+    assert!(serde_json::from_str::<Ided<Customer>>(&json).is_err());
+
+}
