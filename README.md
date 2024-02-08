@@ -16,7 +16,8 @@ With **kind**, you
 
 * serde: `Serialize` and `Deserialize` implementations for `Id`, `Ided`, and the `id_enum!` enums
 * sqlx: transparent read/write for `Id` (with `uuid` columns) and for `Ided` (with tables having an uuid identifier)
-* jsonschema: openapi schema generation
+* jsonschema: JSON schema generation
+* openapi: openapi ID object type for `Id`
 
 In the current version, the sqlx feature is only complete for postgresql.
 
@@ -153,4 +154,63 @@ pub struct Customer {
     pub name: String,
 }
 ```
+## JSON schema
+
+If you are generating JSON schema for your objects using [schemars crate](https://crates.io/crates/schemars), you can enable `jsonschema` feature, and we will generate definition for the `Id` object and any `Ided` object:
+
+```rust
+#[derive(JsonSchema, Kind)]
+#[kind(class="Cust")]
+pub struct Customer {
+    pub name: String
+}
+
+fn main() {
+    let schema = schema_for!(Ided<Customer>);
+    println!("{}", serde_json::to_string_pretty(&schema).unwrap());
+}
+```
+
+will print out
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Customer_ided",
+  "description": "Identified version of Customer",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "string"
+    },
+    "name": {
+      "type": "string"
+    }
+  }
+}
+```
+
+## Open API
+
+Open APi support (gated behind `openapi` feature flag) is currently extremely rudimentary. So far the only supported feature is defining the schema-level `Id` object that can be referenced by other schemas.
+
+Example for including the `Id` into generated schema:
+
+```rust
+pub struct ApiDoc;
+impl utoipa::OpenApi for ApiDoc {
+    fn openapi() -> utoipa::openapi::OpenApi {
+        let mut components = utoipa::openapi::ComponentsBuilder::new();
+        let (kind_name, kind_schema) = kind::openapi_schema();
+        components = components.schema(kind_name, kind_schema);
+        //extra components and paths
+        let mut openapi = utoipa::openapi::OpenApiBuilder::new()
+            .components(Some(components.build()))
+            .build();
+        openapi
+    }
+}
+```
+
 
