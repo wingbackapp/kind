@@ -88,15 +88,14 @@ pub use crate::openapi::*;
 
 #[test]
 fn test_id_ided() {
-
     #[derive(Debug, Kind)]
-    #[kind(class="Cust")]
+    #[kind(class = "Cust")]
     pub struct Customer {
         pub name: String,
     }
 
     #[derive(Debug, Kind)]
-    #[kind(class="Cont")]
+    #[kind(class = "Cont")]
     pub struct Contract {
         // many fields
     }
@@ -109,23 +108,28 @@ fn test_id_ided() {
     );
 
     // You can parse the id from eg JSON, or just a string
-    let id: Id<Customer> = "Cust_371c35ec-34d9-4315-ab31-7ea8889a419a"
-        .parse().unwrap();
+    let id: Id<Customer> = "Cust_371c35ec-34d9-4315-ab31-7ea8889a419a".parse().unwrap();
 
     // The type is checked, so this id can't be misused as a contract id
-    assert!(
-        "Cust_371c35ec-34d9-4315-ab31-7ea8889a419a"
+    assert!("Cust_371c35ec-34d9-4315-ab31-7ea8889a419a"
         .parse::<Id<Contract>>()
-        .is_err()
-    );
+        .is_err());
 
     // The public id is parsed and checked in a case insensitive way
-    assert_eq!(id, "cust_371c35ec-34d9-4315-ab31-7ea8889a419a".parse().unwrap());
-    assert_eq!(id, "CUST_371C35EC-34D9-4315-AB31-7EA8889A419A".parse().unwrap());
+    assert_eq!(
+        id,
+        "cust_371c35ec-34d9-4315-ab31-7ea8889a419a".parse().unwrap()
+    );
+    assert_eq!(
+        id,
+        "CUST_371C35EC-34D9-4315-AB31-7EA8889A419A".parse().unwrap()
+    );
 
     // You can build an identified object from just
     // Here's a new customer:
-    let new_customer = Customer { name: "John".to_string() };
+    let new_customer = Customer {
+        name: "John".to_string(),
+    };
     // Give it an id, by wrapping it in an Ided
     let customer = Ided::new(id, new_customer);
 
@@ -139,10 +143,9 @@ fn test_id_ided() {
 #[cfg(feature = "serde")]
 #[test]
 fn test_serde() {
-
     // deserialize a customer
     #[derive(Debug, Kind, serde::Serialize, serde::Deserialize)]
-    #[kind(class="Cust")]
+    #[kind(class = "Cust")]
     pub struct Customer {
         pub name: String,
     }
@@ -166,5 +169,4 @@ fn test_serde() {
         "name": "John"
     }"#;
     assert!(serde_json::from_str::<Ided<Customer>>(&json).is_err());
-
 }
