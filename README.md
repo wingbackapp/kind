@@ -97,6 +97,12 @@ assert_eq!(
 assert_eq!(customer.entity().name, "John");
 ```
 
+An ided automatically derefs into the entity type, so this is valid too:
+
+```rust
+assert_eq!(customer.name, "John");
+```
+
 ## Serde
 
 An `Ided` object is serialized with the id next to the other fields, without unnecessary nesting.
@@ -118,7 +124,7 @@ assert_eq!(
     customer.id().to_string(),
     "Cust_371c35ec-34d9-4315-ab31-7ea8889a419a"
 );
-assert_eq!(customer.entity().name, "John");
+assert_eq!(customer.name, "John");
 ```
 
 The id kind is checked, the deserialization below fails because the prefix of the id is wrong:
