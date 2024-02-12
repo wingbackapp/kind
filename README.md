@@ -148,7 +148,7 @@ As for serde, `FromRow` implementation on `Ided` is automatically deduced from t
 So you will usually just declare your struct like this to have the `Ided` loaded from an `sqlx::Row` containing both the `id` column and the ones of the raw struct:
 
 ```rust
-#[derive(Kind, sqlx::Row)]
+#[derive(Kind, sqlx::FromRow)]
 #[kind(class="Cust")]
 pub struct Customer {
     pub name: String,
