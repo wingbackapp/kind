@@ -19,19 +19,19 @@ In the first few months of our startup, our Rust objects had Uuid fields everywh
 
 This was obviously a dangerously loose typing, and made us miss a lot of the Rust safety.
 
-And even if we could have managed this with conventions in our Rust codebase, our API would have still been unclear and exemples unhelpful.
+And even if we could have managed this with conventions in our Rust codebase, our API would have still been unclear and examples unhelpful.
 
 We wanted to
 
-* use typed identifiers in Rust, with no overload over Uuid (be "zero cost")
-* still use uuid in postgresql without having to convert
-* have the type be obvious and human readable in JSON and any export
+* use typed identifiers in Rust, with no overhead over Uuid (be "zero cost")
+* still use uuid in postgresql without having to convert between types
+* have the type be obvious and human-readable in JSON and any export
 * not have to add code for that, never explicitly stringify, parse, check types, etc.
 * no boilerplate to declare types and identifiers
 * be able to safely deal with both identified objects and new ones of the same type
 * have our ids implement `Copy`, `Debug`, `Display`, `FromStr`, `Serialize`, `Deserialize`, `Eq`, `Hash`, etc.
 
-We made a library to solve this problem and we're now making it public: **[kind](https://github.com/wingbackapp/kind/)**.
+We made a library to solve this problem, and we're now making it public: **[kind](https://github.com/wingbackapp/kind/)**.
 
 
 ## What it looks like
@@ -115,9 +115,9 @@ And the rest of the Kind magic is made of the derive macro and a bunch of generi
 
 You may have noticed the `Customer` struct has no id field.
 
-This is very important: we split the id part so that we can both have objects with id (most of the time) and objects without id (eg before receiving one).
+This is very important: we split the id part so that we can both have objects with id (most of the time) and objects without id (e.g. before receiving one).
 
-Of course they’re of different types.
+Of course, they’re of different types.
 
 An object with an id is of type `Ided<T>`.
 
@@ -196,7 +196,7 @@ This introduction is too short to detail them all, the documentation is better s
 
 When you use this kind of struct in the Rust ecosystem, you usually need to implement a few standard traits, like `PartialEq` and `Eq`, `Hash`, `PartialOrd` and `Ord`, `Debug`. Kind comes with those implementations.
 
-We also support the cases when you want the user to pass an id but it could be of any kind among a selection. For example your REST API lets you link two objects, but they may be customers, plans, payments, invoices, etc.
+We also support the cases when you want the user to pass an id, but it could be of any kind among a selection. For example your REST API lets you link two objects, but they may be customers, plans, payments, invoices, etc.
 
 Kind made it possible at wingback, and for our API users, to have safe and clear identifiers.
 
