@@ -192,7 +192,7 @@ If you use another DB layer, it’s probably easy to add the relevant extension.
 
 The crate comes with more features.
 
-This blog post is too short to detail them all, the documentation is better suited, but here's for a taste of it.
+This introduction is too short to detail them all, the documentation is better suited, but here's for a taste of it.
 
 When you use this kind of struct in the Rust ecosystem, you usually need to implement a few standard traits, like `PartialEq` and `Eq`, `Hash`, `PartialOrd` and `Ord`, `Debug`. Kind comes with those implementations.
 
