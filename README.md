@@ -1,4 +1,17 @@
 
+[![MIT][s2]][l2]
+[![Latest Version][s1]][l1]
+[![Docs badge]][docs.rs]
+
+[s1]: https://img.shields.io/crates/v/kind.svg
+[l1]: https://crates.io/crates/kind
+
+[s2]: https://img.shields.io/badge/license-MIT-blue.svg
+[l2]: LICENSE
+
+[Docs badge]: https://img.shields.io/badge/docs.rs-rustdoc-green
+[docs.rs]: https://docs.rs/mycrate/
+
 ## Why kind ?
 
 With **kind**, you
