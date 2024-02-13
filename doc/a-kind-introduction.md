@@ -24,7 +24,7 @@ And even if we could have managed this with conventions in our Rust codebase, ou
 We wanted to
 
 * use typed identifiers in Rust, with no overhead over Uuid (be "zero cost")
-* still use uuid in postgresql without having to convert column types
+* still use uuid in postgresql without having to convert between types
 * have the type be obvious and human readable in JSON and any export
 * not have to add code for that, never explicitly stringify, parse, check types, etc.
 * no boilerplate to declare types and identifiers
