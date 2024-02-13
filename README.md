@@ -10,7 +10,7 @@
 [l2]: LICENSE
 
 [Docs badge]: https://img.shields.io/badge/docs.rs-rustdoc-green
-[docs.rs]: https://docs.rs/mycrate/
+[docs.rs]: https://docs.rs/kind/
 
 ## Why kind ?
 
