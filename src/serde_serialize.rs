@@ -31,16 +31,14 @@ pub fn deserialize_raw<'de, O: Identifiable, D: Deserializer<'de>>(
 
 #[cfg(test)]
 mod test {
-    use crate::{Id, Ided};
-    use crate::{IdClass, Identifiable};
-    use kind_proc::Kind;
+    use crate::{Id, IdClass, Ided, Identifiable};
     use rstest::rstest;
     use serde::{Deserialize, Serialize};
     use serde_json::json;
 
     const ID: &str = "86261271-0fc7-46d3-81c6-0b0158628331";
 
-    #[derive(Debug, Kind, Serialize, Deserialize)]
+    #[derive(Debug, Identifiable, Serialize, Deserialize)]
     #[kind(class = "Test")]
     struct TestStruct {
         pub field: String,

@@ -130,7 +130,7 @@ impl<O: Identifiable> Hash for Id<O> {
 
 #[test]
 fn id_sorting() {
-    #[derive(Debug, Kind)]
+    #[derive(Debug, Identifiable)]
     #[kind(class = "Ex")]
     pub struct E {}
 

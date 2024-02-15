@@ -6,11 +6,11 @@
 /// use kind::*;
 ///
 /// // Declare 2 types
-/// #[derive(Debug, Kind)]
+/// #[derive(Debug, Identifiable)]
 /// #[kind(class="Dog")]
 /// pub struct Dog {}
 ///
-/// #[derive(Debug, Kind)]
+/// #[derive(Debug, Identifiable)]
 /// #[kind(class="Cat")]
 /// pub struct Cat {}
 ///

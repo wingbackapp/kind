@@ -41,13 +41,13 @@ You could implement the `Identifiable` trait, but the easiest solution is to jus
 ```rust
 use kind::*;
 
-#[derive(Kind)]
+#[derive(Identifiable)]
 #[kind(class="Cust")]
 pub struct Customer {
     // many fields
 }
 
-#[derive(Kind)]
+#[derive(Identifiable)]
 #[kind(class="Cont")]
 pub struct Contract {
     // many fields
@@ -122,7 +122,7 @@ assert_eq!(customer.name, "John");
 An `Ided` object is serialized with the id next to the other fields, without unnecessary nesting.
 
 ```rust
-#[derive(Kind, serde::Serialize, serde::Deserialize)]
+#[derive(Identifiable, serde::Serialize, serde::Deserialize)]
 #[kind(class="Cust")]
 pub struct Customer {
     pub name: String,
@@ -161,7 +161,7 @@ As for serde, `FromRow` implementation on `Ided` is automatically deduced from t
 So you will usually just declare your struct like this to have the `Ided` loaded from an `sqlx::Row` containing both the `id` column and the ones of the raw struct:
 
 ```rust
-#[derive(Kind, sqlx::FromRow)]
+#[derive(Identifiable, sqlx::FromRow)]
 #[kind(class="Cust")]
 pub struct Customer {
     pub name: String,
@@ -172,7 +172,7 @@ pub struct Customer {
 If you are generating JSON schema for your objects using [schemars crate](https://crates.io/crates/schemars), you can enable `jsonschema` feature, and we will generate definition for the `Id` object and any `Ided` object:
 
 ```rust
-#[derive(JsonSchema, Kind)]
+#[derive(JsonSchema, Identifiable)]
 #[kind(class="Cust")]
 pub struct Customer {
     pub name: String
