@@ -11,7 +11,7 @@ struct Opts {
     class: String,
 }
 
-#[proc_macro_derive(Kind, attributes(kind))]
+#[proc_macro_derive(Identifiable, attributes(kind))]
 pub fn kind_macro_derive(input: TokenStream) -> TokenStream {
     let input = parse_macro_input!(input);
     let opts = Opts::from_derive_input(&input).expect("Wrong options");

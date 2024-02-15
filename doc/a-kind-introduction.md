@@ -64,7 +64,7 @@ We declare a class for each kind of object.
 This is done with a derive attribute. To say that a `Customer` has an id prefixed with `Cust_`, we write this:
 
 ```
-#[derive(Debug, Clone, Serialize, Deserialize, sqlx::FromRow, Kind)]
+#[derive(Debug, Clone, Serialize, Deserialize, sqlx::FromRow, Identifiable)]
 #[kind(class = "Cust")]
 pub struct Customer {
     pub name: String,
@@ -177,7 +177,7 @@ We use [sqlx](https://github.com/launchbadge/sqlx), so we've added some impl to 
 You may have missed the tiny `sqlx::FromRow` in the Customer definition above, so here it is again:
 
 ```
-#[derive(Debug, Clone, Serialize, Deserialize, sqlx::FromRow, Kind)]
+#[derive(Debug, Clone, Serialize, Deserialize, sqlx::FromRow, Identifiable)]
 #[kind(class = "Cust")]
 pub struct Customer {
     pub name: String,

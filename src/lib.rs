@@ -11,13 +11,13 @@
 //! // The structs we want to define Id types for are just annotated. The
 //! // Identifiable trait is derived.
 //!
-//! #[derive(Debug, Kind)]
+//! #[derive(Debug, Identifiable)]
 //! #[kind(class="Cust")]
 //! pub struct Customer {
 //!     // many fields
 //! }
 //!
-//! #[derive(Debug, Kind)]
+//! #[derive(Debug, Identifiable)]
 //! #[kind(class="Cont")]
 //! pub struct Contract {
 //!     // many fields
@@ -88,13 +88,13 @@ pub use crate::openapi::*;
 
 #[test]
 fn test_id_ided() {
-    #[derive(Debug, Kind)]
+    #[derive(Debug, Identifiable)]
     #[kind(class = "Cust")]
     pub struct Customer {
         pub name: String,
     }
 
-    #[derive(Debug, Kind)]
+    #[derive(Debug, Identifiable)]
     #[kind(class = "Cont")]
     pub struct Contract {
         // many fields
@@ -144,7 +144,7 @@ fn test_id_ided() {
 #[test]
 fn test_serde() {
     // deserialize a customer
-    #[derive(Debug, Kind, serde::Serialize, serde::Deserialize)]
+    #[derive(Debug, Identifiable, serde::Serialize, serde::Deserialize)]
     #[kind(class = "Cust")]
     pub struct Customer {
         pub name: String,
@@ -174,5 +174,4 @@ fn test_serde() {
         serde_json::to_string(&customer).unwrap(),
         r#"{"id":"Cust_371c35ec-34d9-4315-ab31-7ea8889a419a","name":"John"}"#,
     );
-
 }
