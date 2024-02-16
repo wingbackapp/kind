@@ -1,0 +1,22 @@
+name: fmt
+
+on:
+  pull_request:
+    paths-ignore:
+      - README.md
+      - CHANGELOG.md
+      - 'doc/**'
+
+jobs:
+  rustfmt:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt
+
+      - name: FMT
+        run: |
+          cargo fmt --all -- --check
