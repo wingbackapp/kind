@@ -1,0 +1,44 @@
+name: Tests
+
+on:
+  pull_request:
+    paths-ignore:
+      - README.md
+      - CHANGELOG.md
+      - 'doc/**'
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+env:
+  RELEASE_TARGET: x86_64-unknown-linux-gnu
+
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout this source code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          path: ./source
+
+      - name: install rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: "${{ env.RELEASE_TARGET }}"
+
+      - name: restore rust cache
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: ./source
+          cache-on-failure: true
+          shared-key: all-deps-tests
+
+      - name: run tests
+        working-directory: ./source
+        env:
+          CARGO_TARGET_DIR: ${{ github.workspace }}/source/target
+        run: |
+          make test
