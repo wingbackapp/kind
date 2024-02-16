@@ -8,9 +8,6 @@ on:
   push:
     tags:
       - 'release/**'
-# FIXME: remove after testing done
-    branches:
-      - chore-add-ci
 
 jobs:
   test-release:
@@ -27,8 +24,7 @@ jobs:
       - name: push crates to registry
         uses: katyo/publish-crates@v2
         with:
-          registry-token: "test" #${{ secrets.CARGO_REGISTRY_TOKEN }}
-          args: --dry-run
+          registry-token: ${{ secrets.CARGO_REGISTRY_TOKEN }}
   make_github_release:
     runs-on: ubuntu-latest
     if: ${{ success() && github.ref_type == 'tag' }}
