@@ -24,6 +24,7 @@ With **kind**, you
 - have your ids implement Copy, Display, FromStr, Serialize, Deserialize, Eq, Hash, etc.
 - safely deal with both identified objects and new ones of same kind
 
+See also the [introduction to Kind motives and operation](https://github.com/wingbackapp/kind/blob/main/doc/a-kind-introduction.md).
 
 ## Optional features
 
