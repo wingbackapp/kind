@@ -155,7 +155,7 @@ fn test_serde() {
         "name": "John"
     }"#;
 
-    let customer: Ided<Customer> = serde_json::from_str(&json).unwrap();
+    let customer: Ided<Customer> = serde_json::from_str(json).unwrap();
     assert_eq!(customer.entity().name, "John");
     assert_eq!(
         customer.id().to_string(),
@@ -168,7 +168,7 @@ fn test_serde() {
         "id": "Con_371c35ec-34d9-4315-ab31-7ea8889a419a",
         "name": "John"
     }"#;
-    assert!(serde_json::from_str::<Ided<Customer>>(&json).is_err());
+    assert!(serde_json::from_str::<Ided<Customer>>(json).is_err());
 
     assert_eq!(
         serde_json::to_string(&customer).unwrap(),
