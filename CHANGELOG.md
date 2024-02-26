@@ -1,3 +1,6 @@
+### v1.0.0 - 2024-02-26
+<a name="1.0.0"></a>
+- Kind is complete and has been used with no know issue for more than a year
 
 ### v0.3.0 - 2024-02-16
 <a name="0.3.0"></a>

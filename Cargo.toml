@@ -4,7 +4,7 @@ members = ["kind_proc"]
 
 [package]
 name = "kind"
-version = "0.3.0"
+version = "1.0.0"
 edition = "2021"
 rust-version = "1.65"
 description = "Costless typed identifiers backed by UUID, with kind readable in serialized versions"
@@ -22,7 +22,7 @@ serde = ["dep:serde", "dep:serde_json"]
 sqlx = ["dep:sqlx"]
 
 [dependencies]
-kind_proc = { path = "kind_proc", version = "0.3.0" }
+kind_proc = { path = "kind_proc", version = "1.0.0" }
 schemars = { optional = true, version = "0.8.16" }
 serde = { optional = true, version = "1.0", features = ["derive"] }
 serde_json = { optional = true, version = "1.0" }
