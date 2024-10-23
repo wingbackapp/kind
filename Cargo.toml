@@ -26,7 +26,7 @@ kind_proc = { path = "kind_proc", version = "1.0.0" }
 schemars = { optional = true, version = "0.8.16" }
 serde = { optional = true, version = "1.0", features = ["derive"] }
 serde_json = { optional = true, version = "1.0" }
-sqlx = { optional = true, version = "0.7", default-features = false, features = ["macros", "runtime-async-std-rustls", "postgres", "chrono", "json", "uuid"] }
+sqlx = { optional = true, version = "0.8", default-features = false, features = ["macros", "runtime-async-std-rustls", "postgres", "chrono", "json", "uuid"] }
 utoipa = { optional = true, version = "4.2" }
 uuid = { version = "1.7", features = ["v4"] }
 
