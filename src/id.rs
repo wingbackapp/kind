@@ -114,6 +114,13 @@ impl<O: Identifiable> Id<O> {
     }
 }
 
+/// Make an Id from any valid Uuid
+impl<O: Identifiable> From<Uuid> for Id<O> {
+    fn from(uuid: Uuid) -> Self {
+        Self::unchecked(uuid)
+    }
+}
+
 /// Parse an Id from its public representation, checking the class
 impl<O: Identifiable> FromStr for Id<O> {
     type Err = IdError;
