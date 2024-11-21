@@ -25,7 +25,7 @@ impl<O: Identifiable> PgHasArrayType for Id<O> {
 }
 
 impl<O: Identifiable> Encode<'_, Postgres> for Id<O> {
-    fn encode_by_ref(&self, buf: &mut PgArgumentBuffer) -> IsNull {
+    fn encode_by_ref(&self, buf: &mut PgArgumentBuffer) -> Result<IsNull, BoxDynError> {
         self.uuid().encode_by_ref(buf)
     }
 }
